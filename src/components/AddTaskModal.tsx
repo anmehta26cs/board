@@ -11,7 +11,7 @@ const AddTaskModal = ({ visible, onClose } : {visible: boolean, onClose: () => v
 
     if (!visible) return null;
 
-    
+
 
     const handleOnClose = (e: React.MouseEvent<HTMLElement>) => {
         const target = e.target as HTMLButtonElement;

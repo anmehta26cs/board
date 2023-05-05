@@ -1,4 +1,15 @@
-import React from 'react'
+import CardContainer from "../components/CardContainer"
+import { Status, Task } from "../types"
+
+const tasks : Task[] = [
+    {
+        id: 1,
+        title: 'task 1',
+        status: Status.DONE,
+        createdAt: 123,
+        notes: 'notes 1'
+    },
+]
 
 const Home = ({isAuth} : {isAuth : boolean}) => {
 
@@ -10,9 +21,9 @@ const Home = ({isAuth} : {isAuth : boolean}) => {
 
   return (
     <div className='flex items-start'>
-        {/* <CardContainer heading='tasks todo' subheading='unfinished'/>
-        <CardContainer heading='tasks in progress' subheading='doing'/>
-        <CardContainer heading='tasks done' subheading='finished'/> */}
+        <CardContainer heading={Status.TODO} tasks={tasks}/>
+        <CardContainer heading={Status.INPROGRESS} tasks={tasks}/>
+        <CardContainer heading={Status.DONE} tasks={tasks}/>
     </div>
   )
 }
