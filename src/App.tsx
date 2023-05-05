@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import AddTask from './pages/AddTask'
+import Groups from './pages/Groups'
 import Navbar from './components/Navbar'
 import { useState } from 'react'
 import { Status, Task } from './types'
@@ -24,6 +25,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home isAuth={auth} tasks={tasks}/>} />
         <Route path="/board" element={<Home isAuth={auth} tasks={tasks}/>} />
+        <Route path="/groups" element={<Groups isAuth={auth}/>} />
         <Route path="/add-task" element={<AddTask isAuth={auth} setTasks={setTasks}/>} />
         <Route path="/login" element={<Login setIsAuth={setAuth}/>} />
       </Routes>

@@ -21,7 +21,7 @@ const CardContainer = ({heading, tasks} : {heading: Status, tasks: Task[]}) => {
         <div className="bg-gray-200 m-2 rounded-md flex-1 h-[calc(100vh-2rem)]">
             <ContainerHeading />
             <div className="flex flex-col gap-2 p-2">
-                {tasks.filter((task) => task.status === heading).map((task) => {
+                {tasks.map((task) => {
                     return (
                         <Card key={task.id} task={task}/>
                     )

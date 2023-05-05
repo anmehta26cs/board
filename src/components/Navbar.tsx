@@ -40,6 +40,7 @@ const Navbar = ({isAuth, setIsAuth, setTasks} : {isAuth : boolean, setIsAuth: Re
             { isAuth ?
             <div>
                 <Link to="/add-task" className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">add task</Link>
+                <Link to="/groups" className="inline-block text-sm px-4 py-2 leading-none rounded text-white border-white hover:border-transparent mt-4 lg:mt-0">groups</Link>
                 <button className="inline-block text-sm px-4 py-2 leading-none rounded text-white border-white hover:border-transparent mt-4 lg:mt-0" onClick={logout}>logout</button>
             </div>
                 :

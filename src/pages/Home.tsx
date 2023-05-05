@@ -14,9 +14,9 @@ const Home = ({isAuth, tasks} : {isAuth : boolean, tasks: Task[]}) => {
 
   return (
     <div className='flex items-start'>
-        <CardContainer heading={Status.TODO} tasks={tasks}/>
-        <CardContainer heading={Status.INPROGRESS} tasks={tasks}/>
-        <CardContainer heading={Status.DONE} tasks={tasks}/>
+        <CardContainer heading={Status.TODO} tasks={tasks.filter((task) => task.status === Status.TODO)} />
+        <CardContainer heading={Status.INPROGRESS} tasks={tasks.filter((task) => task.status === Status.INPROGRESS)}/>
+        <CardContainer heading={Status.DONE} tasks={tasks.filter((task) => task.status === Status.DONE)}/>
     </div>
   )
 }
