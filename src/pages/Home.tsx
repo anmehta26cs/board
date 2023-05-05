@@ -1,22 +1,15 @@
 import CardContainer from "../components/CardContainer"
 import { Status, Task } from "../types"
 
-const tasks : Task[] = [
-    {
-        id: 1,
-        title: 'task 1',
-        status: Status.DONE,
-        createdAt: 123,
-        notes: 'notes 1'
-    },
-]
-
-const Home = ({isAuth} : {isAuth : boolean}) => {
+const Home = ({isAuth, tasks} : {isAuth : boolean, tasks: Task[]}) => {
 
     if (!isAuth) {
         return (
-            <div>Not logged in</div>
-        )
+            <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+              <h1 className="text-4xl font-semibold mb-4">welcome to task board</h1>
+              <p className="text-xl mb-6">please log in to manage your tasks</p>
+            </div>
+          );
     }
 
   return (

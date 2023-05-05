@@ -4,9 +4,9 @@ import { signOut } from 'firebase/auth'
 import { auth } from '../firebase-config'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import AddTaskModal from './AddTaskModal'
+import { Task } from '../types'
 
-const Navbar = ({isAuth, setIsAuth} : {isAuth : boolean, setIsAuth: React.Dispatch<React.SetStateAction<boolean>>}) => {
+const Navbar = ({isAuth, setIsAuth, setTasks} : {isAuth : boolean, setIsAuth: React.Dispatch<React.SetStateAction<boolean>>, setTasks: React.Dispatch<React.SetStateAction<Task[]>>}) => {
 
     const [showModal, setShowModal] = useState(false)
 
@@ -39,7 +39,7 @@ const Navbar = ({isAuth, setIsAuth} : {isAuth : boolean, setIsAuth: React.Dispat
             </div>
             { isAuth ?
             <div>
-                <button className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0" onClick={ handleModalClick }>add task</button>
+                <Link to="/add-task" className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">add task</Link>
                 <button className="inline-block text-sm px-4 py-2 leading-none rounded text-white border-white hover:border-transparent mt-4 lg:mt-0" onClick={logout}>logout</button>
             </div>
                 :
@@ -48,7 +48,6 @@ const Navbar = ({isAuth, setIsAuth} : {isAuth : boolean, setIsAuth: React.Dispat
             </div>
             }
         </nav>
-    <AddTaskModal visible={showModal} onClose={handleModalClose}/>
     </div>
   )
 }
