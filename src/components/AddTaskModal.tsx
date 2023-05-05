@@ -1,13 +1,17 @@
 import React from 'react'
 import { useState } from 'react'
+import { Status } from '../types'
+
+
 
 const AddTaskModal = ({ visible, onClose } : {visible: boolean, onClose: () => void}) => {
-    const [name, setName] = useState('')
     const [task, setTask] = useState('')
-
-
+    const [status, setStatus] = useState(Status.TODO)
+    const [notes, setNotes] = useState('')
 
     if (!visible) return null;
+
+    
 
     const handleOnClose = (e: React.MouseEvent<HTMLElement>) => {
         const target = e.target as HTMLButtonElement;
@@ -30,27 +34,21 @@ const AddTaskModal = ({ visible, onClose } : {visible: boolean, onClose: () => v
                         <label htmlFor="name" className="block text-lg py-2">
                             task
                         </label>
-                        <select name="name" id="name" className="w-full border-2 border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:border-teal-500" value={name} onChange={(e) => setName(e.target.value)}>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                        </select>
+                        <input type="text" name="task" id="task" className="w-full border-2 border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:border-teal-500" placeholder='task...' onChange={(e) => setTask(e.target.value)}/>
 
                         <label htmlFor="task" className="block text-lg py-2">
                             status
                         </label>
-                        <select name="task" id="task" className="w-full border-2 border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:border-teal-500" value={task} onChange={(e) => setTask(e.target.value)}>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
+                        <select name="status" id="status" className="w-full border-2 border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:border-teal-500" value={status} onChange={(e) => setStatus(+e.target.value)}>
+                            <option value={Status.TODO}>todo</option>
+                            <option value={Status.INPROGRESS}>in progress</option>
+                            <option value={Status.DONE}>done</option>
                         </select>
-
-                       
 
                         <label htmlFor="notes" className="block text-lg py-2">
                             notes (optional)
                         </label>
-                        <input type="text" name="notes" id="notes" className="w-full border-2 border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:border-teal-500" placeholder='additional notes'/>
+                        <input type="text" name="notes" id="notes" className="w-full border-2 border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:border-teal-500" placeholder='additional notes' onChange={(e) => setNotes(e.target.value)}/>
                         <div className='flex justify-between'>
                             <button id='submit' className="bg-teal-500 text-white text-lg py-2 px-4 rounded-lg mt-4 hover:bg-teal-600" onClick={handleOnClose}>
                                 add task

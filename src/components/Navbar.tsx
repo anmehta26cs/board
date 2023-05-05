@@ -1,5 +1,9 @@
 import React from 'react'
 import { useState } from 'react'
+import { signOut } from 'firebase/auth'
+import { auth } from '../firebase-config'
+import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import AddTaskModal from './AddTaskModal'
 
 const Navbar = ({isAuth, setIsAuth} : {isAuth : boolean, setIsAuth: React.Dispatch<React.SetStateAction<boolean>>}) => {
@@ -14,22 +18,35 @@ const Navbar = ({isAuth, setIsAuth} : {isAuth : boolean, setIsAuth: React.Dispat
         setShowModal(true)
     }
 
+    const navigate = useNavigate()
+
+    const logout = () => {
+        signOut(auth).then(() => {
+            localStorage.clear()
+            setIsAuth(false)
+            console.log("Logged out")
+            navigate('/login')
+        }).catch((error) => {
+            console.log(error)
+        })
+    }
+
   return (
     <div>
         <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-6">
             <div className="flex items-center flex-shrink-0 text-white mr-6">
-                <span className="font-semibold text-xl tracking-tight">task board</span>
+                <Link to="/" className="font-semibold text-xl tracking-tight">task board</Link>
             </div>
-            {/* <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-                <div className="text-sm lg:flex-grow">
-                    <div className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
-                        <button onClick={handleModalClick}>Add Task</button>
-                    </div>
-                </div>
-            </div> */}
+            { isAuth ?
             <div>
                 <button className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0" onClick={ handleModalClick }>add task</button>
+                <button className="inline-block text-sm px-4 py-2 leading-none rounded text-white border-white hover:border-transparent mt-4 lg:mt-0" onClick={logout}>logout</button>
             </div>
+                :
+            <div>
+                <Link to="/login" className="inline-block text-sm px-4 py-2 leading-none rounded text-white border-white hover:border-transparent mt-4 lg:mt-0">login</Link>
+            </div>
+            }
         </nav>
     <AddTaskModal visible={showModal} onClose={handleModalClose}/>
     </div>
